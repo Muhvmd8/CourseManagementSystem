@@ -1,0 +1,17 @@
+﻿global using CMS.PL.Helper;
+global using CMS.PL.Views.Account;
+global using Microsoft.AspNetCore.Mvc;
+global using CMS.DAL.Repositories;
+global using CMS.DAL.Data.Context;
+global using CMS.DAL.Models;
+global using CMS.PL.Models.Account;
+global using CourseManagementSystem.Controllers;
+global using Microsoft.AspNetCore.Identity;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.EntityFrameworkCore;
+global using System.Net;
+global using System.Net.Mail;
+global using CMS.BLL.Services;
+global using System.Security.Claims;
+global using CMS.BLL.DataTransferObjects;
+

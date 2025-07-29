@@ -1,0 +1,47 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="auth-form">
+    <h1>Welcome to my CMS!</h1>
+    <p>Login your account</p>
+    <br/>
+    <br/>
+    <form asp-action="Login" method="post">
+
+        <input asp-for="UserName" placeholder="UserName" required="">
+        <span asp-validation-for="UserName"></span>
+        <br />
+        <br />
+        <input asp-for="Password" placeholder="Password" required="">
+        <span asp-validation-for="Password"></span>
+        <br />
+        <br />
+
+        <div style="margin-top: 1rem;">
+            <label>
+                <input type="checkbox" asp-for="RememberMe" />
+                <span>Remeber Me</span>
+            </label>
+            <span asp-validation-for="RememberMe" style="color:red;"></span>
+        </div>
+
+
+        <button class="btn-primary">Login</button>
+    </form>
+    <p>Don't have an account? <a asp-action="Register">Register Now!</a></p>
+    <p>Forgot your password? <a asp-action="ForgetPassword">Reset your password!</a></p>
+
+    <div class="social-icons">
+        <img src="/images/facebook.png" alt="Facebook" />
+        <img src="/images/linkedin.png" alt="LinkedIn" />
+        <img src="/images/google.png" alt="Google" />
+    </div>
+</div>
+
+@section Validation {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CourseResponse>
+@{
+    int numberOfTrainees = ViewData["CountOfTrainees"] is int count ? count : 0;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">My Courses</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a class="btn btn-primary" asp-action="AddCourse">+ Add New Course</a>
+
+        <span class="alert alert-success disabled mb-0">
+            Total Trainees: <strong>@numberOfTrainees</strong>
+        </span>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">You haven't created any courses yet.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>@course.Title</td>
+                        <td>@course.Description</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" asp-action="CourseDetails" asp-route-id="@course.Id">Details</a>
+                            <a class="btn btn-sm btn-warning" asp-action="EditCourse" asp-route-id="@course.Id">Edit</a>
+                            <form method="post" asp-action="DeleteCourse" asp-route-id="@course.Id" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this course?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
