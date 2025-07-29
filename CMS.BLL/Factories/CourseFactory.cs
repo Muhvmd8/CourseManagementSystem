@@ -18,7 +18,7 @@ public static class CourseFactory
             StartDate = course.StartDate,
             Price = course.Price,
             Description = course.Description,
-            MaterialFilePath = course.MaterialFilePath,
+            PictureUrl = course.PictureUrl
         };
     public static Course ToCourseEntity(this CourseCreateRequest request)
     => new Course
@@ -28,7 +28,6 @@ public static class CourseFactory
         StartDate = request.StartDate,
         TrainerId = request.TrainerId,
         Price = request.Price,
-        MaterialFilePath = request.MaterialFilePath,
     };
     public static Course ToCourseEntity(this CourseUpdateRequest request)
         => new Course
@@ -38,6 +37,5 @@ public static class CourseFactory
             Title = request.Title,
             StartDate = request.StartDate,
             Price = request.Price,
-            MaterialFilePath = request.MaterialFilePath,
         };
 }

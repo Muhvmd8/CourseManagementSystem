@@ -18,9 +18,6 @@ internal class CourseConfigurations : IEntityTypeConfiguration<Course>
         builder.Property(c => c.Price)
             .HasColumnType("decimal(10,3)");
 
-        builder.Property(c => c.MaterialFilePath)
-            .HasMaxLength (500);
-
         #region Relationship between trainer and course
         builder.HasOne(c => c.Trainer)
             .WithMany(t => t.Courses)
