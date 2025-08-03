@@ -1,0 +1,23 @@
+﻿@using CMS.PL.Models.Course
+@model AddEditCourseViewModel
+
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Course</h2>
+
+    <form asp-action="EditCourse" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+        <partial name="PartialViews/_AddEditCoursePartialView" />
+
+        <button type="submit" class="btn btn-success">Edit Course</button>
+        <a asp-action="Dashboard" class="btn btn-close">Cansel</a>
+    </form>
+</div>
+
+@section validation {
+    <partial name="_ValidationScriptsPartial">
+}
+

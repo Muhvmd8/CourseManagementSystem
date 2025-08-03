@@ -1,15 +1,22 @@
 ﻿namespace CMS.BLL.Services;
-public class CourseService(ICourseRepository courseRepository)
+public class CourseService(ICourseRepository courseRepository, IAttachmentService attachmentService)
     : ICourseService
 {
     public int Add(CourseCreateRequest request)
     {
         var course = request.ToCourseEntity();
+
+        if(request.Image is not null)
+            course.ImageName = attachmentService.UploadAsync(request.Image, @"images\courses").Result;
         return courseRepository.Add(course);
     }
     public int Update(CourseUpdateRequest request)
     {
         var course = request.ToCourseEntity();
+
+        if (request.Image is not null)
+            course.ImageName = attachmentService.UploadAsync(request.Image, @"images\courses").Result;
+
         return courseRepository.Update(course);
     }
     public bool Delete(int id)

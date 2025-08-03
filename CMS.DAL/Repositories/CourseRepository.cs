@@ -1,5 +1,5 @@
 ﻿namespace CMS.DAL.Repositories;
-public class CourseRepository(ApplicationDbContext dbContext)
+public class CourseRepository(ApplicationDbContext dbContext)  
     : ICourseRepository
 {
     public int Add(Course course)

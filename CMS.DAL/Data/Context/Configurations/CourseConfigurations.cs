@@ -12,9 +12,6 @@ internal class CourseConfigurations : IEntityTypeConfiguration<Course>
             .HasColumnType("varchar")
             .HasMaxLength(1000);
 
-        builder.Property(c => c.StartDate)
-            .HasDefaultValueSql("GETDATE()");
-
         builder.Property(c => c.Price)
             .HasColumnType("decimal(10,3)");
 

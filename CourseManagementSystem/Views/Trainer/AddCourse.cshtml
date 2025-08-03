@@ -1,14 +1,24 @@
-﻿@{
-    Layout = null;
+﻿@using CMS.PL.Models.Course
+@model AddEditCourseViewModel
+
+@{
+    ViewData["Title"] = "Add New Course";
 }
 
-<!DOCTYPE html>
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Course</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AddCourse</title>
-</head>
-<body>
-</body>
-</html>
+    <form asp-action="AddCourse" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+
+        <partial name="PartialViews/_AddEditCoursePartialView" />
+        <!-- Hidden TrainerId -->
+        @* <input asp-for="TrainerId" type="hidden" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" /> *@
+
+        <button type="submit" class="btn btn-success">Add Course</button>
+    </form>
+</div>
+
+@section validation {
+    <partial name="_ValidationScriptsPartial">
+}
+

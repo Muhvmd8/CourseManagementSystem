@@ -14,6 +14,8 @@ public class Program
         });
         builder.Services.AddScoped<ICourseRepository, CourseRepository>();
         builder.Services.AddScoped<ICourseService, CourseService>();
+        builder.Services.AddScoped<IAttachmentService, AttachmentService>();
+
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
