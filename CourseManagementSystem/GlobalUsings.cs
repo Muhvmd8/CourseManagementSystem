@@ -16,3 +16,4 @@ global using System.Security.Claims;
 global using CMS.BLL.DataTransferObjects;
 global using CMS.BLL.Services.Attachments;
 global using CMS.PL.Models.Users;
+global using CMS.PL.Models.Course;

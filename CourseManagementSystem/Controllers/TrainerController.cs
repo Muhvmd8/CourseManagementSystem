@@ -1,6 +1,4 @@
-﻿using CMS.PL.Models.Course;
-
-namespace CMS.PL.Controllers;
+﻿namespace CMS.PL.Controllers;
 public class TrainerController
 (
     ICourseService courseService,
@@ -10,6 +8,8 @@ public class TrainerController
     : Controller
 
 {
+
+    #region Dashboard
     [HttpGet]
     public IActionResult Dashboard()
     {
@@ -19,8 +19,10 @@ public class TrainerController
         // View Data For => Number of trainees in all courses
         ViewData["CountOfTrainees"] = courseService.NumberOfTraineesForTrainer(userId);
         return View(courses);
-    }
+    } 
+    #endregion
 
+    #region Course Details
     [HttpGet]
     public IActionResult CourseDetails(int? id)
     {
@@ -30,7 +32,8 @@ public class TrainerController
         if (course is null) return NotFound("Course is not found");
 
         return View(course);
-    }
+    } 
+    #endregion
 
     #region Add Course
     [HttpGet]
@@ -175,5 +178,4 @@ public class TrainerController
     #endregion
 
     // Number of registerd trainees in each course
-
 }

@@ -149,12 +149,6 @@ public class UserController(UserManager<ApplicationUser> userManager,
 
             if (user is null) return NotFound("User not found !!");
 
-            user.UserName = userDto.UserName;
-            user.Email = userDto.Email;
-            user.FullName = userDto.FullName;
-            user.Id = userDto.Id;
-            userManager.GetRolesAsync(user);
-
             var result = userManager.DeleteAsync(user).Result;
             if (result.Succeeded)
             {
