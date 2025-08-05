@@ -13,6 +13,7 @@ public class Program
             options.UseSqlServer(connectionString);
         });
         builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+        builder.Services.AddScoped<ITraineeRepository, TraineeRepository>();
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 

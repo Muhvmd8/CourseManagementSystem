@@ -1,7 +1,9 @@
 ﻿namespace CMS.PL.Controllers;
+[Authorize(Roles = "Admin")]
 public class RoleController(RoleManager<IdentityRole> roleManager,
     IWebHostEnvironment environment,
-    ILogger<RoleController> logger)
+    ILogger<RoleController> logger,
+    UserManager<ApplicationUser> userManager)
     : Controller
 {
     #region Index
@@ -187,7 +189,72 @@ public class RoleController(RoleManager<IdentityRole> roleManager,
             return View("ErrorView");
         }
 
-    } 
+    }
     #endregion
 
+    #region Add Or Remove User
+    [HttpGet]
+    public IActionResult AddOrRemoveUser(string id)
+    {
+        var role = roleManager.FindByIdAsync(id).Result;
+
+        if (role is null) return NotFound();
+
+        var usersInRole = new List<UserInRoleViewModel>();
+        var users = userManager.Users.ToList();
+        foreach ( var user in users)
+        {
+            var userInRole = new UserInRoleViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName
+            };
+
+            if (userManager.IsInRoleAsync(user, role.Name).Result)
+            {
+                userInRole.IsSelected = true;
+            }
+            else
+            {
+                userInRole.IsSelected = false;
+            }
+            usersInRole.Add(userInRole);
+        }
+        ViewData["RoleId"] = role.Id;
+        return View(usersInRole); 
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddOrRemoveUser(string roleId, List<UserInRoleViewModel> users)
+    {
+        var role = await roleManager.FindByIdAsync(roleId);
+        if (role is null) return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            foreach (var user in users)
+            {
+                var appUser = await userManager.FindByIdAsync(user.Id);
+                if (appUser is not null)
+                {
+                    var isInRole = await userManager.IsInRoleAsync(appUser, role.Name);
+
+                    if (user.IsSelected && !isInRole)
+                    {
+                        await userManager.AddToRoleAsync(appUser, role.Name);
+                    }
+                    else if (!user.IsSelected && isInRole)
+                    {
+                        await userManager.RemoveFromRoleAsync(appUser, role.Name);
+                    }
+                }
+            }
+
+            return RedirectToAction(nameof(Edit), new { id = roleId });
+        }
+
+        return View(users);
+    }
+
+    #endregion
 }

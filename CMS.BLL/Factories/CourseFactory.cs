@@ -1,6 +1,4 @@
-﻿using CMS.DAL.Models;
-
-namespace CMS.BLL.Factories;
+﻿namespace CMS.BLL.Factories;
 public static class CourseFactory
 {
     public static IEnumerable<CourseResponse> ToCourseResponse(this IEnumerable<Course> courses) =>
@@ -10,7 +8,6 @@ public static class CourseFactory
             Title = c.Title,
             Description = c.Description,
             ImageName = c.ImageName
-
         });
     public static CourseDetails ToCourseDetails(this Course course)
         => new CourseDetails

@@ -5,17 +5,10 @@ public class AccountController(UserManager<ApplicationUser> userManager,
     private readonly UserManager<ApplicationUser> _userManager = userManager;
     private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
+    public IActionResult Index() => View();
     #region Register
     [HttpGet]
-    public IActionResult Register()
-    {
-        return View();
-    }
+    public IActionResult Register() => View();
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel viewModel)
     {
@@ -37,7 +30,7 @@ public class AccountController(UserManager<ApplicationUser> userManager,
                 };
 
                 var result = await _userManager.CreateAsync(user, viewModel.Password);
-                if (result.Succeeded) return RedirectToAction("SignIn");
+                if (result.Succeeded) return RedirectToAction(nameof(Login));
 
                 foreach (var error in result.Errors)
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -50,10 +43,7 @@ public class AccountController(UserManager<ApplicationUser> userManager,
 
     #region Login
     [HttpGet]
-    public IActionResult Login()
-    {
-        return View();
-    }
+    public IActionResult Login() => View();
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel viewModel)
     {
@@ -84,10 +74,7 @@ public class AccountController(UserManager<ApplicationUser> userManager,
 
     #region Forget Password
     [HttpGet]
-    public IActionResult ForgetPassword()
-    {
-        return View();
-    }
+    public IActionResult ForgetPassword() => View();
     [HttpPost] 
     public async Task<IActionResult> SendResetPasswordUrl(ForgetPasswordViewModel viewModel)
     {
@@ -119,10 +106,7 @@ public class AccountController(UserManager<ApplicationUser> userManager,
     }
     #endregion
 
-    public IActionResult CheckYourInbox()
-    {
-        return View();
-    }
+    public IActionResult CheckYourInbox() => View();
     [HttpGet]
     public IActionResult ResetPassword(string email, string token)
     {

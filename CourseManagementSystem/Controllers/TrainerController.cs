@@ -1,4 +1,7 @@
 ﻿namespace CMS.PL.Controllers;
+
+
+[Authorize(Roles = "Trainer")]
 public class TrainerController
 (
     ICourseService courseService,
